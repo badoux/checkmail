@@ -8,7 +8,6 @@ import (
 	"net/smtp"
 	"regexp"
 	"strings"
-	"time"
 )
 
 type SmtpError struct {
@@ -33,8 +32,7 @@ var (
 	ErrBadFormat        = errors.New("invalid format")
 	ErrUnresolvableHost = errors.New("unresolvable host")
 
-	emailRegexp     = regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
-	timeoutDuration = 3 * time.Second
+	emailRegexp = regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
 )
 
 func ValidateFormat(email string) error {
