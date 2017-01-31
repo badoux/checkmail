@@ -36,9 +36,7 @@ var (
 )
 
 func ValidateFormat(email string) error {
-	email = strings.TrimRight(email, " ")
-	email = strings.TrimLeft(email, " ")
-	email = html.UnescapeString(email)
+	email = html.UnescapeString(strings.TrimSpace(email))
 
 	formatOk := emailRegexp.MatchString(email)
 	if !formatOk {
