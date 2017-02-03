@@ -35,8 +35,7 @@ var (
 )
 
 func ValidateFormat(email string) error {
-	formatOk := emailRegexp.MatchString(email)
-	if !formatOk {
+	if !emailRegexp.MatchString(email) {
 		return ErrBadFormat
 	}
 	return nil
