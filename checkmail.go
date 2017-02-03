@@ -3,7 +3,6 @@ package checkmail
 import (
 	"errors"
 	"fmt"
-	"html"
 	"net"
 	"net/smtp"
 	"regexp"
@@ -36,10 +35,7 @@ var (
 )
 
 func ValidateFormat(email string) error {
-	email = html.UnescapeString(strings.TrimSpace(email))
-
-	formatOk := emailRegexp.MatchString(email)
-	if !formatOk {
+	if !emailRegexp.MatchString(email) {
 		return ErrBadFormat
 	}
 	return nil
@@ -73,7 +69,7 @@ func ValidateHost(email string) error {
 }
 
 func split(email string) (account, host string) {
-	i := strings.LastIndex(email, "@")
+	i := strings.LastIndexByte(email, '@')
 	account = email[:i]
 	host = email[i+1:]
 	return
