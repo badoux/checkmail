@@ -3,7 +3,6 @@ package checkmail
 import (
 	"errors"
 	"fmt"
-	"html"
 	"net"
 	"net/smtp"
 	"regexp"
@@ -36,8 +35,6 @@ var (
 )
 
 func ValidateFormat(email string) error {
-	email = html.UnescapeString(strings.TrimSpace(email))
-
 	formatOk := emailRegexp.MatchString(email)
 	if !formatOk {
 		return ErrBadFormat
