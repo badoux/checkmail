@@ -52,14 +52,14 @@ func ValidateHost(email string) error {
 	}
 
 	client, err := smtp.Dial(fmt.Sprintf("%s:%d", mx[0].Host, 25))
+	defer client.Close()
 	if err != nil {
 		return NewSmtpError(err)
 	}
-	defer client.Close()
 
 	t := time.AfterFunc(forceDisconnectAfter, func() { client.Close() })
 	defer t.Stop()
-
+  
 	err = client.Hello("checkmail.me")
 	if err != nil {
 		return NewSmtpError(err)
