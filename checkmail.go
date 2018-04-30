@@ -7,6 +7,7 @@ import (
 	"net/smtp"
 	"regexp"
 	"strings"
+	"time"
 )
 
 type SmtpError struct {
@@ -26,6 +27,8 @@ func NewSmtpError(err error) SmtpError {
 		Err: err,
 	}
 }
+
+const forceDisconnectAfter = time.Second * 10
 
 var (
 	ErrBadFormat        = errors.New("invalid format")
@@ -53,6 +56,10 @@ func ValidateHost(email string) error {
 	if err != nil {
 		return NewSmtpError(err)
 	}
+
+	t := time.AfterFunc(forceDisconnectAfter, func() { client.Close() })
+	defer t.Stop()
+  
 	err = client.Hello("checkmail.me")
 	if err != nil {
 		return NewSmtpError(err)
