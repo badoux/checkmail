@@ -28,7 +28,7 @@ func NewSmtpError(err error) SmtpError {
 	}
 }
 
-const forceDisconnectAfter = time.Second * 10
+const forceDisconnectAfter = time.Second * 5
 
 var (
 	ErrBadFormat        = errors.New("invalid format")
