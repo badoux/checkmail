@@ -13,6 +13,7 @@ var (
 		account bool //host+user
 	}{
 		{mail: "florian@carrere.cc", format: true, account: true},
+		{mail: "support@g2mail.com", format: true, account: false},
 		{mail: " florian@carrere.cc", format: false, account: false},
 		{mail: "florian@carrere.cc ", format: false, account: false},
 		{mail: "test@912-wrong-domain902.com", format: true, account: false},
@@ -23,8 +24,8 @@ var (
 		{mail: " test@gmail.com", format: false, account: false},
 		{mail: "test@wrong domain.com", format: false, account: false},
 		{mail: "é&ààà@gmail.com", format: false, account: false},
-		{mail: "admin@jalopyjournal.com", format: true, account: true},
-		{mail: "admin@busyboo.com", format: true, account: true},
+		{mail: "admin@jalopyjournal.com", format: true, account: false},
+		{mail: "admin@busyboo.com", format: true, account: false},
 	}
 )
 
