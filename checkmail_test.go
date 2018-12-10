@@ -24,8 +24,7 @@ var (
 		{mail: " test@gmail.com", format: false, account: false},
 		{mail: "test@wrong domain.com", format: false, account: false},
 		{mail: "é&ààà@gmail.com", format: false, account: false},
-		{mail: "admin@jalopyjournal.com", format: true, account: true},
-		{mail: "admin@busyboo.com", format: true, account: true},
+		{mail: "admin@busyboo.com", format: true, account: false},
 		{mail: "a@gmail.fi", format: true, account: false},
 	}
 )

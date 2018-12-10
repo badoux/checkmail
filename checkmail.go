@@ -57,9 +57,6 @@ func ValidateHost(email string) error {
 	}
 	defer client.Close()
 
-	t := time.AfterFunc(forceDisconnectAfter, func() { client.Close() })
-	defer t.Stop()
-
 	err = client.Hello("checkmail.me")
 	if err != nil {
 		return NewSmtpError(err)
