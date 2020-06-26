@@ -39,8 +39,8 @@ for prevent SPAN and BOTS.
 ```go
 func main() {
     var (
-        serverHostName    = "smtp.myserver.com"
-        serverMailAddress = "validuser@myserver.com"
+        serverHostName    = "smtp.myserver.com" // set your SMTP server here
+        serverMailAddress = "validuser@myserver.com"  // set your valid mail address here
     )
     err := checkmail.ValidateHostAndUser(serverHostName, serverMailAddress, "unknown-user-129083726@gmail.com")
     if smtpErr, ok := err.(checkmail.SmtpError); ok && err != nil {
