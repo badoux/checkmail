@@ -1,9 +1,10 @@
-package checkmail_test
+package checkmail
 
 import (
+	"fmt"
+	"os"
 	"testing"
 
-	"github.com/badoux/checkmail"
 )
 
 var (
@@ -35,7 +36,27 @@ func TestValidateHost(t *testing.T) {
 			continue
 		}
 
-		err := checkmail.ValidateHost(s.mail)
+		err := ValidateHost(s.mail)
+		if err != nil && s.account == true {
+			t.Errorf(`"%s" => unexpected error: "%v"`, s.mail, err)
+		}
+		if err == nil && s.account == false {
+			t.Errorf(`"%s" => expected error`, s.mail)
+		}
+	}
+}
+
+func TestValidateHostAndUser(t *testing.T) {
+	var (
+		serverHostName = getenv(t, "self_hostname")
+		serverMailAddress = getenv(t, "self_mail")
+	)
+	for _, s := range samples {
+		if !s.format {
+			continue
+		}
+
+		err := ValidateHostAndUser(serverHostName, serverMailAddress, s.mail)
 		if err != nil && s.account == true {
 			t.Errorf(`"%s" => unexpected error: "%v"`, s.mail, err)
 		}
@@ -47,7 +68,7 @@ func TestValidateHost(t *testing.T) {
 
 func TestValidateFormat(t *testing.T) {
 	for _, s := range samples {
-		err := checkmail.ValidateFormat(s.mail)
+		err := ValidateFormat(s.mail)
 		if err != nil && s.format == true {
 			t.Errorf(`"%s" => unexpected error: "%v"`, s.mail, err)
 		}
@@ -55,4 +76,12 @@ func TestValidateFormat(t *testing.T) {
 			t.Errorf(`"%s" => expected error`, s.mail)
 		}
 	}
+}
+
+func getenv(t *testing.T, name string) (value string) {
+	name = "test_checkmail_"+name
+	if value = os.Getenv(name); value =="" {
+		panic(fmt.Errorf("enviroment variable %q is not defined", name))
+	}
+	return
 }
