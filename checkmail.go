@@ -45,6 +45,16 @@ func ValidateFormat(email string) error {
 	return nil
 }
 
+// ValidateMX validate if MX record exists for a domain.
+func ValidateMX(email string) error {
+	_, host := split(email)
+	if _, err := net.LookupMX(host); err != nil {
+		return ErrUnresolvableHost
+	}
+
+	return nil
+}
+
 // ValidateHost validate mail host.
 func ValidateHost(email string) error {
 	_, host := split(email)
