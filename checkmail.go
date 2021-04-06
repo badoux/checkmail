@@ -117,6 +117,10 @@ func DialTimeout(addr string, timeout time.Duration) (*smtp.Client, error) {
 
 func split(email string) (account, host string) {
 	i := strings.LastIndexByte(email, '@')
+	// If no @ present, not a valid email.
+	if i < 0 {
+		return
+	}
 	account = email[:i]
 	host = email[i+1:]
 	return

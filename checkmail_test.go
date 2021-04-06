@@ -27,6 +27,7 @@ var (
 		{mail: "é&ààà@gmail.com", format: false, account: false},
 		{mail: "admin@busyboo.com", format: true, account: false},
 		{mail: "a@gmail.fi", format: true, account: false},
+		{mail: "", format: false, account: false},
 	}
 )
 
