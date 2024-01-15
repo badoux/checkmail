@@ -9,6 +9,14 @@
 
 ## Usage
 
+Install the Checkmail package 
+
+```
+go get github.com/badoux/checkmail
+
+```    
+
+
 ### 1. Format
 ```go
 func main() {
